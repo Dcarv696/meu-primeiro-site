@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O Meu Projeto Web</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Menu de Navegação Superior -->
+    <nav class="navbar">
+        <ul>
+            <li><a href="index.html">Início</a></li>
+            <li><a href="contacto.html">Contactos</a></li>
+            <li><button id="btn-tema">🌙 Modo Escuro</button></li>
+        </ul>
+    </nav>
+
+    <header>
+        <h1>Bem-vindo ao meu site no Kate!</h1>
+        <h2>O meu primeiro teste em tempo real! 🚀</h2>
+        <p>Desenvolvido com HTML, CSS e JavaScript.</p>
+    </header>
+
+    <main>
+        <section class="card">
+            <h2>O Servidor está Ativo</h2>
+            <p>Se alterar este texto no Kate e guardar, ele muda no browser instantaneamente.</p>
+
+            <button id="botao-clique">Clique Aqui</button>
+            <button id="botao-reset" style="background-color: #e74c3c; margin-left: 10px;">Reiniciar</button>
+
+            <p id="mensagem-js"></p>
+            <p>Total de cliques: <span id="contador">0</span></p>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

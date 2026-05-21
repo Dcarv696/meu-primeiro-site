@@ -1,0 +1,120 @@
+/* Variáveis para controlar as cores (Claro por padrão) */
+:root {
+    --bg-principal: #eef2f7;
+    --bg-cartao: white;
+    --texto-principal: #2c3e50;
+    --borda: #ccc;
+    --transicao-suave: all 0.4s ease;
+}
+
+/* Cores quando o Modo Escuro estiver ativo */
+[data-theme="dark"] {
+    --bg-principal: #1a1a1a;
+    --bg-cartao: #2d2d2d;
+    --texto-principal: #f0f0f0;
+    --borda: #444;
+}
+
+/* Configurações Gerais com transição suave de cor */
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--bg-principal);
+    color: var(--texto-principal);
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    padding-top: 80px;
+    transition: var(--transicao-suave);
+}
+
+/* Animação de Deslize Suave para os Cartões */
+@keyframes deslizarParaCima {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Cartão Central com Animação aplicada */
+.card {
+    background: var(--bg-cartao);
+    border: 1px solid var(--borda);
+    padding: 30px;
+    border-radius: 12px;
+    display: inline-block;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    margin-top: 20px;
+    transition: var(--transicao-suave);
+
+    /* Ativa a animação ao carregar a página */
+    animation: deslizarParaCima 0.6s ease-out forwards;
+}
+
+/* Estilo da Barra de Menu */
+.navbar {
+    background-color: #2c3e50;
+    padding: 15px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    z-index: 1000;
+}
+
+.navbar ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+    transition: color 0.3s;
+}
+
+.navbar a:hover {
+    color: #3498db;
+}
+
+/* Botão do Modo Escuro na Navbar */
+#btn-tema {
+background: #34495e;
+color: white;
+border: none;
+padding: 6px 12px;
+border-radius: 20px;
+cursor: pointer;
+font-size: 14px;
+transition: background 0.3s;
+}
+#btn-tema:hover {
+background: #5d6d7e;
+}
+
+/* Botões Gerais */
+button {
+    background-color: #007acc;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: var(--transicao-suave);
+}
+
+button:hover {
+    background-color: #005999;
+}
