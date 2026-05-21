@@ -42,9 +42,11 @@ document.getElementById('formulario-contacto').addEventListener('submit', functi
     const formulario = event.target;
     const formData = new FormData(formulario);
 
-    // O fetch agora lê automaticamente o endereço correto do HTML (action)
-    fetch(formulario.action, {
-        method: formulario.method,
+    // Garante que o endpoint está correto caso o action do HTML falhe
+    const urlEnvio = formulario.action || 'https://formspree.io';
+
+    fetch(urlEnvio, {
+        method: 'POST', // Força POST que é o exigido pelo Formspree
         body: formData,
         headers: {
             'Accept': 'application/json'
@@ -52,16 +54,21 @@ document.getElementById('formulario-contacto').addEventListener('submit', functi
     })
     .then(response => {
         if (response.ok) {
-            resposta.innerText = `Thank you, ${nomeUtilizador}! Mensagem enviada com sucesso para o Yahoo!`;
+            resposta.innerText = `Obrigado, ${nomeUtilizador}! Mensagem enviada com sucesso para o Yahoo!`;
             resposta.style.color = '#27ae60';
             formulario.reset();
         } else {
-            resposta.innerText = '❌ Ocorreu um erro ao enviar. Tente novamente.';
-            resposta.style.color = '#e74c3c';
+            // Mostra o erro real retornado pelo servidor do Formspree
+            return response.json().then(dadosErro => {
+                resposta.innerText = `❌ Erro do Formspree: ${dadosErro.error || 'Verifique a configuração.'}`;
+                resposta.style.color = '#e74c3c';
+            });
         }
     })
     .catch(error => {
-        resposta.innerText = '❌ Erro de ligação. Verifique a sua internet.';
+        // Alerta detalhado caso o AdBlock ou extensões cortem a ligação
+        resposta.innerText = '❌ Falha na ligação. Desative o AdBlock/extensões ou verifique a internet.';
         resposta.style.color = '#e74c3c';
+        console.error('Erro detalhado da requisição:', error);
     });
 });

@@ -38,8 +38,24 @@ if (elementoContador) {
     atualizarMensagem(cliques);
 }
 
-// Lógica do botão "Clique Aqui"
+// 1. MAPEAMENTO DOS ELEMENTOS DO HTML
 const btnClique = document.getElementById('botao-clique');
+const btnReset = document.getElementById('botao-reset');
+const elementoContador = document.getElementById('contador');
+const mensagem = document.getElementById('mensagem-js');
+
+// 2. INICIALIZAÇÃO DA VARIÁVEL (Recupera o valor guardado ou começa em 0)
+// O localStorage guarda texto, por isso usamos o `Number()` para converter para número
+let cliques = Number(localStorage.getItem('totalCliques')) || 0;
+
+// 3. ATUALIZAÇÃO INICIAL DA INTERFACE
+// Garante que o site mostra os cliques antigos assim que a página abre
+if (elementoContador) {
+    elementoContador.innerText = cliques;
+}
+atualizarMensagem(cliques);
+
+// 4. LÓGICA DO BOTÃO "CLIQUE AQUI"
 if (btnClique) {
     btnClique.addEventListener('click', () => {
         cliques = cliques + 1;
@@ -50,8 +66,7 @@ if (btnClique) {
     });
 }
 
-// Lógica do botão "Reiniciar"
-const btnReset = document.getElementById('botao-reset');
+// 5. LÓGICA DO BOTÃO "REINICIAR"
 if (btnReset) {
     btnReset.addEventListener('click', () => {
         localStorage.removeItem('totalCliques');
@@ -59,7 +74,6 @@ if (btnReset) {
 
         if (elementoContador) elementoContador.innerText = cliques;
 
-        const mensagem = document.getElementById('mensagem-js');
         if (mensagem) {
             mensagem.innerText = 'Dados limpos com sucesso!';
             mensagem.style.color = '#7f8c8d';
@@ -67,21 +81,20 @@ if (btnReset) {
     });
 }
 
-// Função isolada para cuidar das mensagens de meta
+// 6. FUNÇÃO DE ATUALIZAÇÃO DE MENSAGENS
 function atualizarMensagem(valor) {
-    const mensagem = document.getElementById('mensagem-js');
     if (!mensagem) return; // Se não encontrar o elemento, sai da função
 
-    if (valor === 5) {
+    if (valor === 0) {
+        mensagem.innerText = ''; // Fica vazio se for zero
+    } else if (valor === 5) {
         mensagem.innerText = '🏆 Incrível! Alcançou a meta de 5 cliques!';
         mensagem.style.color = '#e67e22';
     } else if (valor === 10) {
         mensagem.innerText = '🚀 Avançado! Já vai em 10 cliques!';
         mensagem.style.color = '#9b59b6';
-    } else if (valor > 0) {
+    } else {
         mensagem.innerText = '🎉 O JavaScript está a funcionar em tempo real!';
         mensagem.style.color = '#27ae60';
-    } else {
-        mensagem.innerText = ''; // Limpa se for 0
     }
 }

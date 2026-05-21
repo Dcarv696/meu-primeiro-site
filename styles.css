@@ -3,7 +3,9 @@
     --bg-principal: #eef2f7;
     --bg-cartao: white;
     --texto-principal: #2c3e50;
+    --texto-secundario: #ffffff;
     --borda: #ccc;
+    --bg-input: #ffffff;
     --transicao-suave: all 0.4s ease;
 }
 
@@ -13,6 +15,7 @@
     --bg-cartao: #2d2d2d;
     --texto-principal: #f0f0f0;
     --borda: #444;
+    --bg-input: #3d3d3d; /* Fundo escuro para os inputs do formulário */
 }
 
 /* Configurações Gerais com transição suave de cor */
@@ -77,7 +80,7 @@ body {
 }
 
 .navbar a {
-    color: white;
+    color: var(--texto-secundario);
     text-decoration: none;
     font-weight: bold;
     font-size: 16px;
@@ -117,4 +120,18 @@ button {
 
 button:hover {
     background-color: #005999;
+}
+
+/* ESTILOS PARA ADAPTAR O FORMULÁRIO AO MODO ESCURO */
+input, textarea {
+    background-color: var(--bg-input) !important;
+    color: var(--texto-principal) !important;
+    border: 1px solid var(--borda) !important;
+    transition: var(--transicao-suave);
+}
+
+/* Ajuste de contraste para labels no formulário */
+label {
+    color: var(--texto-principal);
+    transition: var(--transicao-suave);
 }
