@@ -44,7 +44,7 @@ document.getElementById('formulario-contacto').addEventListener('submit', functi
     // Captura os dados reais do formulário
     const formData = new FormData(document.getElementById('formulario-contacto'));
 
-    // Envio para o endpoint do Formspree com o seu ID real
+    // ENVIO CORRIGIDO: Removemos os cabeçalhos JSON conflituosos para o browser gerir o envio de dados
     fetch('https://formspree.io', {
         method: 'POST',
         body: formData,
