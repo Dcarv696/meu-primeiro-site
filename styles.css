@@ -135,3 +135,13 @@ label {
     color: var(--texto-principal);
     transition: var(--transicao-suave);
 }
+/* Estilo do Rodapé */
+.rodape {
+    margin-top: 50px;
+    padding: 20px 0;
+    border-top: 1px solid var(--borda);
+    color: var(--texto-principal);
+    font-size: 14px;
+    font-weight: bold;
+    transition: var(--transicao-suave);
+}
