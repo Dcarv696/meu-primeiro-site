@@ -23,14 +23,12 @@ document.getElementById('formulario-contacto').addEventListener('submit', functi
     const mensagemUtilizador = document.getElementById('mensagem').value.trim();
     const resposta = document.getElementById('resposta-formulario');
 
-    // 1. Validação do tamanho da mensagem
     if (mensagemUtilizador.length < 10) {
         resposta.innerText = '❌ Erro: A sua mensagem deve ter pelo menos 10 caracteres.';
         resposta.style.color = '#e74c3c';
         return;
     }
 
-    // 2. Validação profissional de e-mail usando Expressão Regular (Regex)
     const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!regexEmail.test(emailUtilizador)) {
         resposta.innerText = '❌ Erro: Por favor, introduza um e-mail válido (ex: nome@dominio.com).';
@@ -41,10 +39,9 @@ document.getElementById('formulario-contacto').addEventListener('submit', functi
     resposta.innerText = 'A enviar mensagem... por favor aguarde.';
     resposta.style.color = '#f39c12';
 
-    // Captura os dados reais do formulário
     const formData = new FormData(document.getElementById('formulario-contacto'));
 
-    // ENVIO CORRIGIDO: Removemos os cabeçalhos JSON conflituosos para o browser gerir o envio de dados
+    // CORREÇÃO: Link completo com a rota /f/ e o seu ID exclusivo
     fetch('https://formspree.io', {
         method: 'POST',
         body: formData,
