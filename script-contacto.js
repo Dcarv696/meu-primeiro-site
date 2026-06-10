@@ -14,6 +14,11 @@ if (btnTemaContacto) {
     });
 }
 
+function mostrarResposta(elemento, texto, tipo) {
+    elemento.className = tipo;
+    elemento.innerText = texto;
+}
+
 // Submissão do Formulário Formspree
 const formContacto = document.getElementById('formulario-contacto');
 if (formContacto) {
@@ -24,22 +29,21 @@ if (formContacto) {
         const emailUtilizador = document.getElementById('email').value.trim();
         const mensagemUtilizador = document.getElementById('mensagem').value.trim();
         const resposta = document.getElementById('resposta-formulario');
+        const btnEnviar = formContacto.querySelector('.btn-enviar');
 
         if (mensagemUtilizador.length < 10) {
-            resposta.innerText = '❌ Erro: A sua mensagem deve ter pelo menos 10 caracteres.';
-            resposta.style.color = '#e74c3c';
+            mostrarResposta(resposta, '❌ Erro: A sua mensagem deve ter pelo menos 10 caracteres.', 'erro');
             return;
         }
 
         const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!regexEmail.test(emailUtilizador)) {
-            resposta.innerText = '❌ Erro: Por favor, introduza um e-mail válido.';
-            resposta.style.color = '#e74c3c';
+            mostrarResposta(resposta, '❌ Erro: Por favor, introduza um e-mail válido.', 'erro');
             return;
         }
 
-        resposta.innerText = 'A enviar mensagem... por favor aguarde.';
-        resposta.style.color = '#f39c12';
+        btnEnviar.disabled = true;
+        mostrarResposta(resposta, 'A enviar mensagem... por favor aguarde.', 'aguardar');
 
         const formData = new FormData(formContacto);
         const urlEnvio = formContacto.action || 'https://formspree.io';
@@ -53,20 +57,20 @@ if (formContacto) {
         })
         .then(response => {
             if (response.ok) {
-                resposta.innerText = `Obrigado, ${nomeUtilizador}! Mensagem enviada com sucesso para o Yahoo!`;
-                resposta.style.color = '#27ae60';
+                mostrarResposta(resposta, `Obrigado, ${nomeUtilizador}! Mensagem enviada com sucesso.`, 'sucesso');
                 formContacto.reset();
             } else {
                 return response.json().then(dadosErro => {
-                    resposta.innerText = `❌ Erro do Formspree: ${dadosErro.error || 'Verifique a configuração.'}`;
-                    resposta.style.color = '#e74c3c';
+                    mostrarResposta(resposta, `❌ Erro do Formspree: ${dadosErro.error || 'Verifique a configuração.'}`, 'erro');
                 });
             }
         })
         .catch(error => {
-            resposta.innerText = '❌ Falha na ligação. Desative o AdBlock/extensões ou verifique a internet.';
-            resposta.style.color = '#e74c3c';
+            mostrarResposta(resposta, '❌ Falha na ligação. Desative o AdBlock/extensões ou verifique a internet.', 'erro');
             console.error(error);
+        })
+        .finally(() => {
+            btnEnviar.disabled = false;
         });
     });
 }

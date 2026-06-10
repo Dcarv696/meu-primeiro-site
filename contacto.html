@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contactos - O Meu Projeto</title>
-    <!-- CORREÇÃO: Alterado de style.css para styles.css para carregar o seu design -->
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -13,7 +12,7 @@
     <nav class="navbar">
         <ul>
             <li><a href="index.html">Início</a></li>
-            <li><a href="contacto.html">Contactos</a></li>
+            <li><a href="contacto.html" class="ativo" aria-current="page">Contactos</a></li>
             <li><button id="btn-tema">🌙 Modo Escuro</button></li>
         </ul>
     </nav>
@@ -27,27 +26,26 @@
         <section class="card">
             <h2>Envie uma Mensagem</h2>
 
-            <!-- FORMULÁRIO CONFIGURADO COM ACTION E METHOD -->
-            <form id="formulario-contacto" action="https://formspree.io/f/xykvevle" method="POST" style="display: flex; flex-direction: column; gap: 15px; text-align: left; width: 300px; margin: 0 auto;">
-                <div>
-                    <label for="nome" style="display: block; margin-bottom: 5px; font-weight: bold;">Nome:</label>
-                    <input type="text" id="nome" name="name" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+            <form id="formulario-contacto" class="formulario-contacto" action="https://formspree.io/f/xykvevle" method="POST">
+                <div class="campo">
+                    <label for="nome">Nome:</label>
+                    <input type="text" id="nome" name="name" required autocomplete="name">
                 </div>
 
-                <div>
-                    <label for="email" style="display: block; margin-bottom: 5px; font-weight: bold;">E-mail:</label>
-                    <input type="email" id="email" name="email" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+                <div class="campo">
+                    <label for="email">E-mail:</label>
+                    <input type="email" id="email" name="email" required autocomplete="email">
                 </div>
 
-                <div>
-                    <label for="mensagem" style="display: block; margin-bottom: 5px; font-weight: bold;">Mensagem:</label>
-                    <textarea id="mensagem" name="message" rows="4" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; resize: vertical; box-sizing: border-box;"></textarea>
+                <div class="campo">
+                    <label for="mensagem">Mensagem:</label>
+                    <textarea id="mensagem" name="message" rows="4" required minlength="10"></textarea>
                 </div>
 
-                <button type="submit" style="width: 100%; padding: 10px; border-radius: 4px; border: none; background-color: #2c3e50; color: white; cursor: pointer; font-weight: bold;">Enviar Mensagem</button>
+                <button type="submit" class="btn-enviar">Enviar Mensagem</button>
             </form>
 
-            <p id="resposta-formulario" style="margin-top: 15px; font-weight: bold; text-align: center;"></p>
+            <p id="resposta-formulario" role="status" aria-live="polite"></p>
         </section>
     </main>
 
